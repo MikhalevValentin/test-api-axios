@@ -1,13 +1,14 @@
 <template>
   <div id="about">
-    <ul class="wrap-article" v-for="result in results">
+    <h3>{{ films.title }}</h3>
+    <ul class="wrap-article">
       <li class="id-info">
-        <span>id пользователя: {{ result.userId }}</span><br>
-        <span>id статьи: {{ result.id }}</span>
+        <span>{{ films.director }}</span><br>
+        <span>{{ films.producer }}</span><br>
+        <span>{{ films.release_date }}</span>
       </li>
-      <li class="article-title">{{ result.title }}</li>
       <li class="article-body">
-        <p>{{ result.body }}</p>
+        <p>{{ films.opening_crawl }}</p>
       </li>
     </ul>
   </div>
@@ -18,14 +19,14 @@ export default {
   name: 'about',
   data () {
     return {
-      results: []
+      films: []
     }
   },
   mounted() {
-    axios.get("http://jsonplaceholder.typicode.com/posts")
-    .then(response => {this.results = response.data})
+    axios.get("https://swapi.co/api/films/1")
+    .then(response => {this.films = response.data})
     .catch(e => {this.errors.push(e)})
-  },
+  }
 }
 </script>
 <!-- styling for the component -->
